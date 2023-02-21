@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books!</title>
+    <!-- Part 3: Add styling -->
+    <script>
+        // Part 2: You can remove reverseString as its no longer needed
+        function reverseString(s) {
+            return s.split("").reverse().join("");
+        }
+
+        window.onload = function () {
+            const xhr = new XMLHttpRequest()
+            xhr.onload = function () {
+                const bodyElement = document.querySelector("body")
+                if (xhr.status == 200) {
+                    // Part 2: Remove the next line and replace with your code
+                    bodyElement.append(reverseString(xhr.responseText))
+                } else {
+                    bodyElement.append("Daten konnten nicht geladen werden, Status " + xhr.status + " - " + xhr.statusText)
+                }
+            }
+            xhr.open("GET", "/data")
+            xhr.send()
+        }
+    </script>
+    <title>Document</title>
+</head>
+
+<body>
+</body>
+
+</html>
