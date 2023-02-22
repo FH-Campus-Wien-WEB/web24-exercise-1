@@ -1,32 +1,42 @@
 # Web Technologies - Exercise 1
 
-The first exercise consists of three parts. One of them on the server-side, two on the client-side. You find detailed information about these three parts in the <code>Tasks</code> section.
+This first exercise in Web Technologies consists of three parts. One of them will be implemented on the server-side, two need to be implemented on the client-side. You find detailed information about these three parts in the **Tasks** section below.
 
-Before you start, you will have to install the dependencies of the sceleton project. In the project's root directory (where this README file is located), run
+Before you start, you will have to set up the development environment. First, clone the repository that GitHub Classroom generated for you. Then, configure an IDE, be recommand using [**WebStorm**](https://www.jetbrains.com/webstorm/) or [**Visual Studio Code**](https://code.visualstudio.com/). Finally, you need to install the dependencies of this project. In the project's root directory (where this <span style="font-family:Lucida Sans Typewriter">README</span> file is located), run
 
     npm install
 
-To run the server, you have two options. The first one is to run it using the start script. To do so, run
+This project consists of a server, which is implemented using [Node.js](https://nodejs.org/en/) and a client, which is your favorite Web Browser.
+
+Before you can access the application, you have to start the server. To do so, you have two options. The first one is to run it using the start script:
 
     npm start
 
-The second, recommended option is to run the server using `nodemon` to monitor for changes in your code. When using `nodemon`, you do not have to restart your server when making changes. To run your server using `nodemon`, you can use the `start-nodemon` script by running
+Remember that you need to restart your server whenever you make changes to your project!
+
+To avoid restarting the server manually, there is a second, recommended option. This option is to start the server using [`nodemon`](https://www.npmjs.com/package/nodemon). `nodemon` will not only start your server, but also monitor your code for changes you make. As a consequence, when using `nodemon`, you do not have to restart your server when making changes, which is quite helpfull during development.
+
+There is no need to install `nodemon` explicitely, it is already a development dependency of this project.
+
+To run your server using `nodemon`, you can use the `start-nodemon` script by running
 
     npm run start-nodemon
 
-Whichever option you choose, you should see the message
+Whichever option you choose, after starting the server you should see the message
 
     Server now listening on http://localhost:3000/
 
-in your terminal. Visit this URL to test the application. You will see a simple message from the server: `Hello world!`.
+in your terminal. Visit [http://localhost:3000/](http://localhost:3000/) using your favorite Web Browser to test the application. You will see a simple message from the server displayed on the page:
+
+    Hello world!
 
 ## Project structure
 
-At the moment, the application consists of only one file on both sides. On the server-side, the file is `server/server.js`, on the client side, the file is `server/files/index.html`. 
+For the time being, the application consists of only one file on both sides. On the server-side, the file is `server/server.js`, on the client side, the file is `server/files/index.html`. 
 
-First, have a look at `server.js`, maybe you can guess the responsibilities of the separate blocks. For now, there are only two blocks of code that you need to understand.
+First, have a look at `server.js`, maybe you can guess the responsibilities of the individual blocks of code. For now, there are two blocks that are of interest to you when implementing this exercise.
 
-The first one is
+The first one is:
 
 ```js
     app.get('/data', function (req, res) {
@@ -34,8 +44,7 @@ The first one is
     })
 ```
 
-This blocks tells the server to send the string `!dlrow olleH` to the client making a `GET` request to the path `/data`. You can check that the server is doing that by accessing `http://localhost:3000/data`. You will see the original, reversed data that the server sends.
-
+This blocks tells the server to send the string `!dlrow olleH` to the client making a `GET` request to the path `/data`. You can check that the server is doing that by accessing [http://localhost:3000/data](http://localhost:3000/data). You will see the original, reversed data that the server sends. 
 
 The second part of `server.js` you need to understand is
 
@@ -45,7 +54,7 @@ The second part of `server.js` you need to understand is
 
 This part tells the server to serve all files located in the `files` directory to a client requesting them. We are making use of so-called middleware to accomplish that. For now you do not need to understand how this works in detail, we are going to talk about middleware in future classes. The thing you need to understand is that this is the way how the `index.html` file located within the `files` directory on the server-side is being sent to the client.
 
-Now, browse the application again by pointing a browser to `http://localhost:3000/` and open the page source. You will find the contents of `server/files/index.html`. 
+Now, browse the application again by pointing a browser to [http://localhost:3000/](http://localhost:3000/) and open the page source. You will find the contents of `server/files/index.html`. 
 
 If you look closely, you will find the lines
 
@@ -54,18 +63,18 @@ If you look closely, you will find the lines
     xhr.send()
 ```
 
-which are resonsible for asking the server for the data by making the `GET` request mentioned above. Again, you do not need to understand the details of you this works, the only interesting part for now is the the following line
+which are resonsible for asking the server for the data by making the `GET` request mentioned above. Again, you do not need to understand the details of how this works, the only interesting part for now is the following line
 
 ```js
     bodyElement.append(reverseString(xhr.responseText))
 ```
 
-That's were the magic is happening. The `responseText` property of the `xhr` variable contains the content that was sent by the server - the reversed message `!dlrow olleH`. The client uses the function `reverseString` (which you find a few lines above) to reverse the string and the `append` method of the html element of the body of the page to add the reversed message to the body. That's how the message from the server ends up on our web page, when we open the application.
+That's were the data received from the server is added to the page. The `responseText` property of the `xhr` variable contains the content that was sent by the server - the reversed message `!dlrow olleH`. The client uses the function `reverseString` (which you find a few lines above) to reverse the string and the `append` method of the html element of the body of the page to add the reversed message to the body. That's how the message from the server ends up on our web page, when we open the application.
 
 ## Tasks
 As mentioned at the beginning, this exercise consists of three parts. 
 
-1. First, who will have to change the data the the server returns, e.g. you will have to replace the `!dlrow olleH` with JSON content about movies. This is done on the server side in `server/server.js`.
+1. First, who will have to change the data the server returns, e.g. you will have to replace the `!dlrow olleH` with JSON content about movies. This is done on the server side in `server/server.js`.
 1. The second part is already located on the client side in `server/files/index.html`. You will parse the JSON data that the client sends and build HTML elements in the DOM to render that data.
 1. Finally, the third part also needs to be implemented on the client side. In this part you will style the data that you rendered in part 2 to look a bit prettier.
 
