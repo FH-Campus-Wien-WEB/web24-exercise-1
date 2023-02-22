@@ -5,9 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Books!</title>
-    <!-- Part 3: Add styling -->
+    <style>
+        body {
+            font-family: 'Lucida Sans', sans-serif;
+        }
+
+        article {
+            border-style: solid;
+            border-radius: 12px;
+            padding: 4px;
+            margin: 4px;
+        }
+
+        span {
+            margin-right: 4px;
+            font-weight: bold;
+        }
+    </style>
     <script>
-        // Part 2: You can remove reverseString as its no longer needed
         function reverseString(s) {
             return s.split("").reverse().join("");
         }
@@ -17,8 +32,27 @@
             xhr.onload = function () {
                 const bodyElement = document.querySelector("body")
                 if (xhr.status == 200) {
-                    // Part 2: Remove the next line and replace with your code
-                    bodyElement.append(reverseString(xhr.responseText))
+                    const data = JSON.parse(xhr.responseText)
+                    for (book of data) {
+                        const articleElement = document.createElement("article")
+
+                        const titleElement = document.createElement("h1")
+                        titleElement.append(book.title);
+
+                        const isbnElement = document.createElement("p")
+                        const isbnLabelElement = document.createElement("span")
+                        isbnLabelElement.textContent = "ISBN:"
+                        isbnElement.append(isbnLabelElement, book.isbn)
+
+                        const priceElement = document.createElement("p")
+                        const priceLabelElement = document.createElement("span")
+                        priceLabelElement.textContent = "Price:"
+                        priceElement.append(priceLabelElement, book.price.value.toFixed(2), book.price.currency)
+
+                        articleElement.append(titleElement, isbnElement, priceElement)
+
+                        bodyElement.append(articleElement)
+                    }
                 } else {
                     bodyElement.append("Daten konnten nicht geladen werden, Status " + xhr.status + " - " + xhr.statusText)
                 }
@@ -27,7 +61,6 @@
             xhr.send()
         }
     </script>
-    <title>Document</title>
 </head>
 
 <body>
