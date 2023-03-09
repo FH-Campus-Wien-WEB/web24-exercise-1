@@ -54,11 +54,11 @@ The second part of `server.js` of interest to you is
     app.use(express.static(path.join(__dirname, 'files')));
 ```
 
-This part tells the server to serve all files located in the `files` directory to a client requesting them. We are making use of so-called middleware to accomplish that. For now you do not need to understand how this works in detail, we are going to talk about middleware in future classes. The thing you need to understand is that this is the way - configure -  how the `index.html` file located within the `files` directory on the server-side is being sent to the client.
+This part tells the server to serve all files located in the `files` directory to a client requesting them. We are making use of so-called middleware to accomplish that. For now you do not need to understand how this works in detail, we are going to talk about middleware in future classes. The thing you need to understand is this is how we configure that the `index.html` file located in the `files` directory on the server-side is being sent to a client upon request.
 
-Now, browse the application again by pointing a browser to [http://localhost:3000/](http://localhost:3000/) and **open the page source**. You will find the contents of `server/files/index.html`. 
+Now, browse the application again by pointing a browser to [http://localhost:3000/](http://localhost:3000/) and **open the page source**. You will find the contents of `server/files/index.html`. Out middleware is working.
 
-If you look closely near the end of the file, you will find the lines
+If you look closely near the end of the `index.html`, you will find the lines
 
 ```js
     xhr.open("GET", "/movies")
