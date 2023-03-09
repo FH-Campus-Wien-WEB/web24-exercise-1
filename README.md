@@ -36,7 +36,7 @@ in your terminal. Visit [http://localhost:3000/](http://localhost:3000/) using y
 
 For the time being, the application consists of only one file on both sides. On the server-side, the file is `server/server.js`, on the client side, the file is `server/files/index.html`. 
 
-First, have a look at `server.js`, maybe you can guess the responsibilities of the individual blocks of code. For now, there are two blocks that are of interest to you when implementing this exercise.
+First, have a look at `server/server.js`, maybe you can guess the responsibilities of the individual blocks of code. For now, there are two blocks that are of interest to you when implementing this exercise.
 
 The first one is:
 
@@ -48,13 +48,13 @@ The first one is:
 
 This blocks tells the server to send the string `!dlrow olleH` to a client making a `GET` request to the path `/movies`. You can check that the server is doing that by accessing [http://localhost:3000/movies](http://localhost:3000/movies). You will see the original, reversed data that the server sends. 
 
-The second part of `server.js` you need to understand is
+The second part of `server.js` of interest to you is
 
 ```js
     app.use(express.static(path.join(__dirname, 'files')));
 ```
 
-This part tells the server to serve all files located in the `files` directory to a client requesting them. We are making use of so-called middleware to accomplish that. For now you do not need to understand how this works in detail, we are going to talk about middleware in future classes. The thing you need to understand is that this is the way how the `index.html` file located within the `files` directory on the server-side is being sent to the client.
+This part tells the server to serve all files located in the `files` directory to a client requesting them. We are making use of so-called middleware to accomplish that. For now you do not need to understand how this works in detail, we are going to talk about middleware in future classes. The thing you need to understand is that this is the way - configure -  how the `index.html` file located within the `files` directory on the server-side is being sent to the client.
 
 Now, browse the application again by pointing a browser to [http://localhost:3000/](http://localhost:3000/) and **open the page source**. You will find the contents of `server/files/index.html`. 
 
