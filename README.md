@@ -143,7 +143,7 @@ You may have noticed that all properties have String values, even numerical data
 1. Reformat *Released* to be in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format
 1. Reformat *Runtime* to be an number (remove the unit **min** in the process)
 1. Reformat *Genres* to be an array of genres and not a comma-separated string of genres
-1. Do the same with *Directors*, *Writers*, and *Actors*
+1. Do the same you did with *Genres* with *Directors*, *Writers*, and *Actors*, that is, convert them into an array of strings
 1. Reformat *Metascore* to be a number
 1. Reforamt *imdbRating* to be a number
 
