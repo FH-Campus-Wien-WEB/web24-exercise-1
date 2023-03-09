@@ -56,7 +56,7 @@ The second part of `server.js` of interest to you is
 
 This part tells the server to serve all files located in the `files` directory to a client requesting them. We are making use of so-called middleware to accomplish that. For now you do not need to understand how this works in detail, we are going to talk about middleware in future classes. The thing you need to understand is this is how we configure that the `index.html` file located in the `files` directory on the server-side is being sent to a client upon request.
 
-Now, browse the application again by pointing a browser to [http://localhost:3000/](http://localhost:3000/) and **open the page source**. You will find the contents of `server/files/index.html`. Out middleware is working.
+Now, browse the application again by pointing a browser to [http://localhost:3000/](http://localhost:3000/) and **open the page source**. You will find the contents of `server/files/index.html`. Our middleware is working.
 
 If you look closely near the end of the `index.html`, you will find the lines
 
@@ -65,7 +65,7 @@ If you look closely near the end of the `index.html`, you will find the lines
     xhr.send()
 ```
 
-which are requesting the data from the server by making the `GET` request mentioned above. Again, you do not need to understand the details of how this works, the only interesting part for now is the following line
+which are requesting the movie data from the server by making the `GET` request mentioned above. Again, you do not need to understand the details of how this works on the client-side, the only interesting part is the following line
 
 ```js
     bodyElement.append(reverseString(xhr.responseText))
@@ -77,8 +77,8 @@ That's were the data received from the server is added to the page. The `respons
 As mentioned at the beginning, this exercise consists of three parts.
 
 1. First, who will have to change the data the server returns, e.g. you will have to replace the `!dlrow olleH` with JSON content about movies. This is done on the server side in `server/server.js`.
-1. The second part is already located on the client side in `server/files/index.html`. You will parse the JSON data that the client sends and build HTML elements in the DOM to render that data.
-1. In the third part you will make the page look somewhat prettier by adding some style. Styling using CSS is also implemented on the client side. 
+1. The second part is already located on the client side in `server/files/index.html`. Remember: Altough this files resides on the server, it is requested by the client and executed on the client-side. Here you will parse the JSON movie data that the server sends and build HTML elements in the DOM to render that data.
+1. In the third part you will make the page look somewhat prettier by adding some style. Styling using CSS is also implemented on the client side.
 
 ### Checking your implementation
 To check whether your implementation is working as expected you **should** use Cypress end-to-end tests. These tests are the exact same tests used to assess your implementation once you commit it to the GitHub repository. 
