@@ -87,7 +87,7 @@ To start the tests, run
 
     npm run cypress
 
-If you do so without making any changes to the application, all tests will fail. After implementing an individual part, the corresponding test should pass. It is best to do them in order, because they depend on each other. 
+If you do so without making any changes to the application, all tests will fail. After implementing an individual part, the corresponding test will pass. It is best to do them in order, because they build on top of each other. 
 
 Here's how the Cypress UI looks after running the command above:
 
@@ -115,7 +115,7 @@ If necessary, you can run them manually by clicking on the `Reload icon` in the 
 
 ### Part 1: Returning the movie data from the /movies endpoint
 
-In this first part of the assignment, you have to structure movie data in JSON. Choose **at least three movies** of your liking from the [OMDb API](https://www.omdbapi.com/) and use their **Examples** section to retrieve the full JSON data for these movies.
+In this first part of the assignment, you have to structure movie data in JSON. Choose **at least three movies** of your liking and use the **Examples** section of the [OMDb API](https://www.omdbapi.com/) to retrieve the data for these movies in JSON format.
 
 For example, this is the data returned when searching for *The Thing*:
 
