@@ -153,7 +153,7 @@ Finally, put all the movies you chose in one JSON array and return that array in
 
 ### Part 2: Rendering the movie data on the client side
 
-In this part you will have to dynamically add new HTML elements to the `body` of the application`s HTML page. Before you can use the information, you will have to find a way to parse the JSON data into a JavaScript array. Then, loop through the movies contained in the array and build the following HTML element structure for each movie:
+In this part you will have to dynamically add new HTML elements to the `body` of the application's HTML page. Before you can use the information, you will have to find a way to parse the JSON data into a JavaScript array. Then, loop through the movies contained in the array and build the following HTML element structure for each movie:
 
 * **article**. An article for the whole movie
     * **img**. An image showing the movie *Poster*
@@ -163,13 +163,13 @@ In this part you will have to dynamically add new HTML elements to the `body` of
         * A **span** containing a [bullet](https://en.wikipedia.org/wiki/Bullet_(typography)). See this [Stackoverflow question](https://stackoverflow.com/questions/13093126/insert-unicode-character-into-javascript) to see how to include a Unicode character in a JavaScript string
         * A **span** containing the *Released* date. Use [toLocaleDateString](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString) to format the ISO 8601 date string.
 
-    * A paragraph **p** containing a **span** element for *each* genre of the movie. Assign the *class* **genre** to the element. For a movie with the genres Horror and Mystery this will look like this: ```<p><span class="genre">Horror</span><span class="genre">Mystery</span></p>```
+    * A paragraph **p** containing a **span** element for *each* genre of the movie. Assign the *class* **genre** to the element. For a movie with the genres *Horror* and *Mystery* this will look like this: ```<p><span class="genre">Horror</span><span class="genre">Mystery</span></p>```
     * Another paragraph **p** containing just the *Plot*
-    * **h2**. A header saying 'Directors'
+    * **h2**. A header saying `Directors`
     * **ul**. An unordered list of all the directors of the movie, each director in its own **li** (list item)
-    * **h2**. Another header for the 'Writers'
+    * **h2**. Another header for the `Writers`
     * **ul**. Another unordered list with list items for each writer. E.g. for *The Thing*, the writers list will look like this: ```<ul><li>Bill Lancaster</li><li>John W. Campbell Jr.</li></ul>```
-    * **h2**. A last header for the 'Actors'
+    * **h2**. A last header for the `Actors`
     * **ul**. Again, an unordered list with all actors
        
 
