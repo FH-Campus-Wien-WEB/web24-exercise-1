@@ -1,12 +1,14 @@
 # Web Technologies - Exercise 1
 
-This first exercise in Web Technologies consists of three parts. You will implemented the first one on the server-side and the other two on the client-side. You find detailed information about these parts in the **Tasks** section below.
+This first exercise in Web Technologies consists of three parts. You will implement the first one on the server-side and the other two on the client-side. You find detailed information about these parts in the **Tasks** section below.
 
-Before you start, you will have to set up the development environment. First and foremost, install [**Node.js**](https://nodejs.org/en/). Then, clone the repository that GitHub Classroom generated for you. Now configure an IDE, we recommand using [**WebStorm**](https://www.jetbrains.com/webstorm/) or [**Visual Studio Code**](https://code.visualstudio.com/). Finally, you need to install the dependencies of this project. In the project's root directory (where this <span style="font-family:Lucida Sans Typewriter">README</span> file is located), run
+Before you start, you will have to set up the development environment. First and foremost, install [**Node.js**](https://nodejs.org/en/). Then, clone the repository that GitHub Classroom generated for you. Since you read this, this is most likely where you are now :).
+
+Now configure an IDE, we recommand using [**WebStorm**](https://www.jetbrains.com/webstorm/) or [**Visual Studio Code**](https://code.visualstudio.com/). Finally, you need to install the dependencies of this project. In the project's root directory (where this <span style="font-family:Lucida Sans Typewriter">README</span> file is located), run
 
     npm install
 
-This project consists of a server, which is implemented using **Node.js** and a client, which will be your favorite web browser.
+The project consists of a server, which is implemented using **Node.js** and a client, which will be your favorite web browser.
 
 To be able to access the application using a browser, you will have to start the server. To do so, you have two options. The first one is to run it using the start script:
 
