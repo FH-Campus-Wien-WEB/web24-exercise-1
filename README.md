@@ -76,8 +76,8 @@ That's were the data received from the server is added to the page. The `respons
 ## Tasks
 As mentioned at the beginning, this exercise consists of three parts.
 
-1. First, who will have to change the data the server returns, e.g. you will have to replace the `!dlrow olleH` with JSON content about movies. This is done on the server side in `server/server.js`.
-1. The second part is already located on the client side in `server/files/index.html`. Remember: Altough this files resides on the server, it is requested by the client and executed on the client-side. Here you will parse the JSON movie data that the server sends and build HTML elements in the DOM to render that data.
+1. First, who will have to change the data the server returns, e.g. you will have to replace `!dlrow olleH` with movie data formatted in JSON. This is done on the server side in `server/server.js`.
+1. The second part is already located on the client side in `server/files/index.html`. Remember: Although this file resides on the server, it is requested by the client and parsed, displayed and executed on the client-side. Here you will add code to receive and parse the JSON movie data that the server sends and create and add HTML elements to the DOM to render that data.
 1. In the third part you will make the page look somewhat prettier by adding some style. Styling using CSS is also implemented on the client side.
 
 ### Checking your implementation
