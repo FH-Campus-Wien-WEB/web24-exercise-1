@@ -147,9 +147,9 @@ You may have noticed that all properties have String values, even numerical data
 1. Reformat *Metascore* to be a number
 1. Reforamt *imdbRating* to be a number
 
-Finally, put all the movies you chose in one JSON array and return that array instead of the `!dlrow olleH` string. To be precise, the array you return will contain three objects each representing the data of one movie.
+Finally, put all the movies you chose in one JSON array and return that array instead of the `!dlrow olleH` string. To be precise, the array you return will contain three objects each of which represents the data of one movie.
 
-**Once you have done that, the first test will pass!** Since we did not change anything on the client side, the movie data you return will show up reversed on the web page.
+**Once you have done that, the first test will pass! Make sure to check.** Since we did not change anything on the client side, the movie data you return will show up reversed on the web page.
 
 ### Part 2: Rendering the movie data on the client side
 
