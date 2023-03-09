@@ -170,7 +170,7 @@ In this part you will have to dynamically add new HTML elements to the `body` of
     * **h2**. Another header for the `Writers`
     * **ul**. Another unordered list with list items for each writer. E.g. for *The Thing*, the writers list will look like this: ```<ul><li>Bill Lancaster</li><li>John W. Campbell Jr.</li></ul>```
     * **h2**. A last header for the `Actors`
-    * **ul**. Again, an unordered list with all actors
+    * **ul**. Again, an unordered list with list items for all actors
        
 
 Here's a screenshot of what your application will (appoximately) look like after implementing this part:
@@ -181,7 +181,7 @@ Here's a screenshot of what your application will (appoximately) look like after
 
 ### Part 3: Styling the page
 
-In this final part you will add some styling by applying CSS selectors and properties. You will add CSS rules to the `style` element to the `head` of the page. The styling consists of six rules, five will apply to tag names (**body**, **h1**, ...), one will apply the **span** element with class *genre*.
+In this final part you will add some styling by applying CSS. You will add CSS rules to the `style` element to the `head` of the page. The styling consists of six rules, five will apply to tag names (**body**, **img**, ...), one will apply the **span** element with class *genre*.
 
 Here are the details regarding the rules you must add:
 
@@ -192,8 +192,8 @@ Here are the details regarding the rules you must add:
 1. **h1**
     1. A `font-size`: either **bold** or a weight between 100 to 400
     1. A short-hand `margin` consisting of two values
-        * the first  value specifies the top and bottom margins and must be between 4 and 16
-        * the second value specifies the left and right margin and must be between 0 and 8
+        * the first  value specifies the top and bottom margins and must be between 4 and 16 pixels
+        * the second value specifies the left and right margin and must be between 0 and 8 pixels
 1. **article**
     1. A `background-color` of your liking
     1. A `border-radius` between 2 and 32 pixels
@@ -203,7 +203,7 @@ Here are the details regarding the rules you must add:
     1. A **right** margin of more than 0 pixels
 1. And finally, some styling for the genre tags, that is, the **span** elements that have class *genre*. Use a [class selector](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors)!
     1. A `background-color` of your liking
-    1. A short-hand `padding` with two values (top-bottom and left-right), both between 2 and 16 pixels
+    1. A short-hand `padding` with two values (one for top-bottom and one for left-right), both between 2 and 16 pixels
     1. A `border-radius` between 2 and 32 pixels
     1. A `border` property containing a **width** between 1 and 8 pixels, a **style** and a **color** of your liking
 
