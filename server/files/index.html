@@ -18,7 +18,7 @@
             xhr.onload = function () {
                 const bodyElement = document.querySelector("body")
                 if (xhr.status == 200) {
-		    /* Part 2: Build the HTML elements here */ 
+		            /* Part 2: Build the HTML elements here and append them to the body */ 
                     bodyElement.append(reverseString(xhr.responseText))
                 } else {
                     bodyElement.append("Daten konnten nicht geladen werden, Status " + xhr.status + " - " + xhr.statusText)
