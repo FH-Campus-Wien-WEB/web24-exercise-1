@@ -163,15 +163,41 @@ In this part you will have to dynamically add new HTML elements to the `body` of
         * A **span** containing a [bullet](https://en.wikipedia.org/wiki/Bullet_(typography)). See this [Stackoverflow question](https://stackoverflow.com/questions/13093126/insert-unicode-character-into-javascript) to see how to include a Unicode character in a JavaScript string
         * A **span** containing the *Released* date. Use [toLocaleDateString](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString) to format the ISO 8601 date string.
 
-    * A paragraph **p** containing a **span** element for *each* genre of the movie. Assign the *class* **genre** to the element. For a movie with the genres *Horror* and *Mystery* this will look like this: ```<p><span class="genre">Horror</span><span class="genre">Mystery</span></p>```
+    * A paragraph **p** containing a **span** element for *each* genre of the movie. Assign the *class* **genre** to the element. 
     * Another paragraph **p** containing just the *Plot*
     * **h2**. A header saying `Directors`
     * **ul**. An unordered list of all the directors of the movie, each director in its own **li** (list item)
     * **h2**. Another header for the `Writers`
-    * **ul**. Another unordered list with list items for each writer. E.g. for *The Thing*, the writers list will look like this: ```<ul><li>Bill Lancaster</li><li>John W. Campbell Jr.</li></ul>```
+    * **ul**. Another unordered list with list items for each writer.
     * **h2**. A last header for the `Actors`
     * **ul**. Again, an unordered list with list items for all actors
-       
+
+This is what the HTML structure looks for a specific movie:
+
+```html
+<article>
+    <img src="https://m.media-amazon.com/images/M/MV5BNGViZWZmM2EtNGYzZi00ZDAyLTk3ODMtNzIyZTBjN2Y1NmM1XkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SX300.jpg">
+    <h1>The Thing</h1>
+    <p><span>Runtime 1h 49m</span><span>•</span><span>Released on 6/25/1982</span></p>
+    <p><span class="genre">Horror</span><span class="genre">Mystery</span><span class="genre">Sci-Fi</span></p>
+    <p>A research team in Antarctica is hunted by a shape-shifting alien that assumes the appearance of its victims.</p>
+    <h2>Director</h2>
+    <ul>
+        <li>John Carpenter</li>
+    </ul>
+    <h2>Writers</h2>
+    <ul>
+        <li>Bill Lancaster</li>
+        <li>John W. Campbell Jr.</li>
+    </ul>
+    <h2>Actors</h2>
+    <ul>
+        <li>Kurt Russell</li>
+        <li>Wilford Brimley</li>
+        <li>Keith David</li>
+    </ul>
+</article>
+```
 
 Here's a screenshot of what your application will (appoximately) look like after implementing this part:
 
