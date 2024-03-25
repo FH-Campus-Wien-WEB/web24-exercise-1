@@ -1,20 +1,20 @@
 # Web Technologies - Exercise 1
 
-This first exercise in Web Technologies consists of three parts. You will implement the first one on the server-side and the other two on the client-side. You find detailed information about these parts in the **Tasks** section below.
+This first exercise in Web Technologies consists of three parts. You will implement the first one on the server-side and the others on the client-side. Detailed information about these parts is in the **Tasks** section below.
 
-Before you start, you will have to set up the development environment. First and foremost, install [**Node.js**](https://nodejs.org/en/). Then, clone the repository that GitHub Classroom generated for you. Since you read this, this is most likely where you are now :).
+Before you start, you will have to set up the development environment. First install [**Node.js**](https://nodejs.org/en/). Then, clone the repository that GitHub Classroom generated for you. Since you read this, this is most likely where you are now :).
 
-Now configure an IDE, we recommand using [**WebStorm**](https://www.jetbrains.com/webstorm/) or [**Visual Studio Code**](https://code.visualstudio.com/). Finally, you need to install the dependencies of this project. In the project's root directory (where this <span style="font-family:Lucida Sans Typewriter">README</span> file is located), run
+Now configure an IDE, we recommend using [**WebStorm**](https://www.jetbrains.com/webstorm/) or [**Visual Studio Code**](https://code.visualstudio.com/). Finally, install the dependencies of this project. In the project's root directory (where this <span style="font-family:Lucida Sans Typewriter">README</span> file is located), run
 
     npm install
 
-The project consists of a server, which is implemented using **Node.js** and a client, which will be your favorite web browser.
+The project consists of a server, implemented using **Node.js**, and a client, which will be your favorite web browser.
 
-To be able to access the application using a browser, you will have to start the server. To do so, you have two options. The first one is to run it using the start script:
+To access the application using a browser, you must start the server. To do so, you have two options. The first one is to run it using the start script:
 
     npm start
 
-When using the start script, remember that you need to *restart the server whenever you make changes* to your project!
+When using the start script, remember that you need to *restart the server whenever you make changes* on the backend!
 
 To avoid restarting the server manually each time after making a change, there is a second, **recommended** option. This option is to start the server using [`nodemon`](https://www.npmjs.com/package/nodemon). `nodemon` will not only start your server, but also monitor your code for changes you make. As a consequence, when using `nodemon`, you do not have to restart your server when making changes, which is quite helpful during development.
 
@@ -24,7 +24,7 @@ To run your server using `nodemon`, you can use the `start-nodemon` script by ru
 
     npm run start-nodemon
 
-Whichever option you choose, after starting the server you should see the message
+After starting the server you should see the message
 
     Server now listening on http://localhost:3000/
 
@@ -34,9 +34,9 @@ in your terminal. Visit [http://localhost:3000/](http://localhost:3000/) using y
 
 ## Project structure
 
-For the time being, the application consists of only one file on both sides. On the server-side, the file is `server/server.js`, on the client side, the file is `server/files/index.html`. 
+Now, the application consists of only one file on both sides. On the server-side, the file is `server/server.js`, on the client side, the file is `server/files/index.html`. 
 
-First, have a look at `server/server.js`, maybe you can guess the responsibilities of the individual blocks of code. For now, there are two blocks that are of interest to you when implementing this exercise.
+First, have a look at `server/server.js`, maybe you can guess the responsibilities of the individual blocks of code. For now, two blocks are of interest to you when implementing this exercise.
 
 The first one is:
 
@@ -46,19 +46,19 @@ The first one is:
     })
 ```
 
-This blocks tells the server to send the string `!dlrow olleH` to a client making a `GET` request to the path `/movies`. You can check that the server is doing that by accessing [http://localhost:3000/movies](http://localhost:3000/movies). You will see the original, reversed data that the server sends. 
+This block tells the server to send the string `!dlrow olleH` to a client making a `GET` request to the path `/movies`. You can check that the server is doing that by accessing [http://localhost:3000/movies](http://localhost:3000/movies). You will see the original, reversed data that the server sends. 
 
-The second part of `server.js` of interest to you is
+The second one is:
 
 ```js
     app.use(express.static(path.join(__dirname, 'files')));
 ```
 
-This part tells the server to serve all files located in the `files` directory to a client requesting them. We are making use of so-called middleware to accomplish that. For now you do not need to understand how this works in detail, we are going to talk about middleware in future classes. The thing you need to understand is this is how we configure that the `index.html` file located in the `files` directory on the server-side is being sent to a client upon request.
+This part tells the server to serve all files located in the `files` directory to a client requesting them. We are making use of so-called middleware to accomplish that. For now you do not need to understand how this works in detail. We will delve into middleware in upcoming classes. The thing you need to understand is this is how we configure that the `index.html` file located in the `files` directory on the server-side is being sent to a client upon request.
 
 Now, browse the application again by pointing a browser to [http://localhost:3000/](http://localhost:3000/) and **open the page source**. You will find the contents of `server/files/index.html`. Our middleware is working.
 
-If you look closely near the end of the `index.html`, you will find the lines
+If you look near the end of the `index.html`, you will find the lines:
 
 ```js
     xhr.open("GET", "/movies")
@@ -71,23 +71,16 @@ which are requesting the movie data from the server by making the `GET` request 
     bodyElement.append(reverseString(xhr.responseText))
 ```
 
-That's were the data received from the server is added to the page. The `responseText` property of the `xhr` variable contains the content that was sent by the server - the reversed message `!dlrow olleH`. The client then uses the function `reverseString` (which you find a few lines above) to reverse the string and the `append` method of the html element of the body of the page to add the reversed message to the body. That's how the message from the server ends up on our web page when we open the application.
-
-## Tasks
-As mentioned at the beginning, this exercise consists of three parts.
-
-1. First, who will have to change the data the server returns, e.g. you will have to replace `!dlrow olleH` with movie data formatted in JSON. This is done on the server side in `server/server.js`.
-1. The second part is already located on the client side in `server/files/index.html`. Remember: Although this file resides on the server, it is requested by the client and parsed, displayed and executed on the client-side. Here you will add code to receive and parse the JSON movie data that the server sends and create and add HTML elements to the DOM to render that data.
-1. In the third part you will make the page look somewhat prettier by adding some style. Styling using CSS is also implemented on the client side.
+That's where the data received from the server is added to the page. The `responseText` property of the `xhr` variable contains the content that was sent by the server - the reversed message `!dlrow olleH`. The client then uses the function `reverseString` (which you find a few lines above) to reverse the string and the `append` method of the html element of the body of the page to add the reversed message to the body. That's how the message from the server ends up on our web page when we open the application.
 
 ### Checking your implementation
-To check whether your implementation is working as expected you **should** use Cypress end-to-end tests. These tests are the exact same tests used to assess your implementation once you commit it to the GitHub repository. 
+To check whether your implementation is working as expected you **should** use Cypress end-to-end tests. These tests are the same tests used to assess your implementation once you commit it to the GitHub repository. 
 
 To start the tests, run
 
     npm run cypress
 
-If you do so without making any changes to the application, all tests will fail. After implementing an individual part, the corresponding test will pass. It is best to do them in order, because they build on top of each other. 
+If you do so without making any changes to the application, all tests will fail. After implementing an individual part, the corresponding test will pass. It is best to do them in order because they build on top of each other. 
 
 Here's how the Cypress UI looks after running the command above:
 
@@ -97,11 +90,11 @@ Choose `E2E Testing`, now you will be able to choose a browser to run the tests:
 
 ![Cypress UI - Browser Choice](images/cypress-ui-browser-choice.png "The browser choice of the Cypress UI")
 
-Apart from the browsers found on your system, the Electron Browser is also available. This browser cames baked into Cypress and does not need to be installed separately. Just in case you wonder where this one comes from ;).
+Apart from the browsers found on your system, the Electron Browser is also available. This browser comes baked into Cypress and does not need to be installed separately. Just in case you wonder where this one comes from ;).
 
-**Warning!** Firefox has bugs when it comes to testing style related tests, so it's best to avoid testing using Firefox. We recommend to use **Chrome** because that's the one we will use during  assessment.
+**Warning!** Firefox has bugs when it comes to testing style-related tests, so it's best to avoid testing using Firefox. We recommend using **Chrome** because that's the one we will use during assessment.
 
-After you choose a browser and click the `Start E2E Testing in ...` button, the Cypress Tests are started using that browser. In Chrome this looks like this (altough your process name will be different):
+After you choose a browser and click the `Start E2E Testing in ...` button, the Cypress Tests are started using that browser. In Chrome this looks like this (although your process name will be different):
 
 ![Cypress test specifications (specs) shown in Chrome](images/chrome-specs.png "The test specifications (specs) screen opened in Chrome")
 
@@ -153,7 +146,7 @@ Finally, put all the movies you chose in one JSON array and return that array in
 
 ### Part 2: Rendering the movie data on the client side
 
-In this part you will have to dynamically add new HTML elements to the `body` of the application's HTML page. Before you can use the information, you will have to find a way to parse the JSON data into a JavaScript array. Then, loop through the movies contained in the array and build the following HTML element structure for each movie:
+In this part, you will have to dynamically add new HTML elements to the `body` of the application's HTML page. Before you can use the information, you will have to find a way to parse the JSON data into a JavaScript array. Then, loop through the movies contained in the array and build the following HTML element structure for each movie:
 
 * **article**. An article for the whole movie
     * **img**. An image showing the movie *Poster*
@@ -172,7 +165,7 @@ In this part you will have to dynamically add new HTML elements to the `body` of
     * **h2**. A last header for the `Actors`
     * **ul**. Again, an unordered list with list items for all actors
 
-This is what the HTML structure looks for a specific movie:
+This is what the HTML structure looks like for a specific movie:
 
 ```html
 <article>
@@ -199,7 +192,7 @@ This is what the HTML structure looks for a specific movie:
 </article>
 ```
 
-Here's a screenshot of what your application will (appoximately) look like after implementing this part:
+Here's a screenshot of what your application will (approximately) look like after implementing this part:
 
 ![Part 2 example implementation shown Chrome](images/Part2-done.png "Part 2 implementation shown in Chrome")
 
@@ -207,7 +200,7 @@ Here's a screenshot of what your application will (appoximately) look like after
 
 ### Part 3: Styling the page
 
-In this final part you will add some styling by applying CSS. You will add CSS rules to the `style` element to the `head` of the page. The styling consists of six rules, five will apply to tag names (**body**, **img**, ...), one will apply the **span** element with class *genre*.
+In this final part, you will add some styling by applying CSS. You will add CSS rules to the `style` element to the `head` of the page. The styling consists of six rules, five will apply to tag names (**body**, **img**, ...), and one will apply the **span** element with class *genre*.
 
 Here are the details regarding the rules you must add:
 
