@@ -14,11 +14,11 @@ To access the application using a browser, you must start the server. To do so, 
 
     npm start
 
-When using the start script, remember that you need to *restart the server whenever you make changes* on the backend!
+When using the start script, remember to *restart the server whenever you make changes* on the backend!
 
-To avoid restarting the server manually each time after making a change, there is a second, **recommended** option. This option is to start the server using [`nodemon`](https://www.npmjs.com/package/nodemon). `nodemon` will not only start your server, but also monitor your code for changes you make. As a consequence, when using `nodemon`, you do not have to restart your server when making changes, which is quite helpful during development.
+To avoid restarting the server manually each time after making a change, there is a second, **recommended** option. This option is to start the server using [`nodemon`](https://www.npmjs.com/package/nodemon). `nodemon` will not only start your server, but also monitor your code for changes you make. Consequently, when using `nodemon`, you do not have to restart your server when making changes, which is quite helpful during development.
 
-There is no need to install `nodemon` explicitely, it is already a development dependency of the project you cloned.
+There is no need to install `nodemon` explicitly, it is already a development dependency of the project you cloned.
 
 To run your server using `nodemon`, you can use the `start-nodemon` script by running
 
@@ -26,7 +26,7 @@ To run your server using `nodemon`, you can use the `start-nodemon` script by ru
 
 After starting the server you should see the message
 
-    Server now listening on http://localhost:3000/
+    The server now listening on http://localhost:3000/
 
 in your terminal. Visit [http://localhost:3000/](http://localhost:3000/) using your favorite Web Browser to test the application. You will see a simple message from the server displayed on the page:
 
@@ -36,7 +36,7 @@ in your terminal. Visit [http://localhost:3000/](http://localhost:3000/) using y
 
 Now, the application consists of only one file on both sides. On the server-side, the file is `server/server.js`, on the client side, the file is `server/files/index.html`. 
 
-First, have a look at `server/server.js`, maybe you can guess the responsibilities of the individual blocks of code. For now, two blocks are of interest to you when implementing this exercise.
+First, look at `server/server.js`, maybe you can guess the responsibilities of the individual blocks of code. For now, two blocks are of interest to you when implementing this exercise.
 
 The first one is:
 
@@ -54,7 +54,7 @@ The second one is:
     app.use(express.static(path.join(__dirname, 'files')));
 ```
 
-This part tells the server to serve all files located in the `files` directory to a client requesting them. We are making use of so-called middleware to accomplish that. For now you do not need to understand how this works in detail. We will delve into middleware in upcoming classes. The thing you need to understand is this is how we configure that the `index.html` file located in the `files` directory on the server-side is being sent to a client upon request.
+This part tells the server to serve all files located in the `files` directory to a client requesting them. We are making use of so-called middleware to accomplish that. For now you do not need to understand how this works in detail. We will delve into middleware in upcoming classes. We have set up the backend so that the index.html file, which resides in the files directory on the server, is transmitted to a client upon request.
 
 Now, browse the application again by pointing a browser to [http://localhost:3000/](http://localhost:3000/) and **open the page source**. You will find the contents of `server/files/index.html`. Our middleware is working.
 
