@@ -1,4 +1,4 @@
-# Web Technologies - Exercise 1
+# Web Technologies - Exercise 1 
 
 This first exercise in Web Technologies consists of three parts. You will implement the first one on the server-side and the others on the client-side. Detailed information about these parts is in the **Tasks** section below.
 
