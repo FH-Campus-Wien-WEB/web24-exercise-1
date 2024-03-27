@@ -134,7 +134,7 @@ You may have noticed that all properties have String values, even numerical data
 
 1. Rename *Genre*, *Director*, *Writer* to their plural forms to be consistent with *Actors*
 1. Reformat *Released* to be in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format
-1. Reformat *Runtime* to be an number (remove the unit **min** in the process)
+1. Reformat *Runtime* to be a number (remove the unit **min** in the process)
 1. Reformat *Genres* to be an array of genres and not a comma-separated string of genres
 1. Do the same you did with *Genres* with *Directors*, *Writers*, and *Actors*, that is, convert them into an array of strings
 1. Reformat *Metascore* to be a number
@@ -209,7 +209,7 @@ Here are the details regarding the rules you must add:
 1. **img**
     1. A `border-radius` of 2 to 32 pixels
 1. **h1**
-    1. A `font-size`: either **bold** or a weight between 100 to 400
+    1. A `font-size`: a weight between 100% to 400%
     1. A short-hand `margin` consisting of two values
         * the first  value specifies the top and bottom margins and must be between 4 and 16 pixels
         * the second value specifies the left and right margin and must be between 0 and 8 pixels
