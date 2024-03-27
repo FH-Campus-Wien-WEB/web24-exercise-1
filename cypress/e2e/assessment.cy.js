@@ -64,7 +64,7 @@ describe('Testing API response', () => {
     const child = element.children[index]
     expect(child.tagName).to.be.eq(parentTag)
     elements.forEach(e => expect(child.textContent).to.contain(e))
-    expect(toChildTagNames(child)).to.deep.eq(Array(elements.length).fill(childTag))  // Exakte Struktur in anderem Test
+    expect(toChildTagNames(child)).to.deep.eq(Array(elements.length).fill(childTag))
   }
 
   it('Data rendering is correct', () => {
@@ -79,7 +79,7 @@ describe('Testing API response', () => {
           for (let i = 0; i < movieElements.length; i++) {
             const movieElement = movieElements[i]
 
-            expect(movieElement.children.length, "Movie article must have exacly 11 child elements").to.eq(11)
+            expect(movieElement.children.length, "Movie article must have exactly 11 child elements").to.eq(11)
             expect(toChildTagNames(movieElement), "Movie article child elements must be correct").to.deep.eq(['IMG', 'H1', 'P', 'P', 'P', 'H2', 'UL', 'H2', 'UL', 'H2', 'UL'])
 
             const movie = movies[i]
