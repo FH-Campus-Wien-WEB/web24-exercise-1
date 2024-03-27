@@ -36,7 +36,7 @@ in your terminal. Visit [http://localhost:3000/](http://localhost:3000/) using y
 
 Now, the application consists of only one file on both sides. On the server-side, the file is `server/server.js`, on the client side, the file is `server/files/index.html`. 
 
-First, look at `server/server.js`, maybe you can guess the responsibilities of the individual blocks of code. For now, two blocks are of interest to you when implementing this exercise.
+First, look at `server/server.js`, maybe you can guess the responsibilities of the individual blocks of code. For now, you'll find two blocks interesting when you're implementing this exercise.
 
 The first one is:
 
@@ -65,7 +65,7 @@ If you look near the end of the `index.html`, you will find the lines:
     xhr.send()
 ```
 
-which are requesting the movie data from the server by making the `GET` request mentioned above. Again, you do not need to understand the details of how this works on the client-side, the only interesting part is the following line
+which requests the movie data from the server by making the `GET` request mentioned above. Again, you do not need to understand the details of how this works on the client-side, the only interesting part is the following line
 
 ```js
     bodyElement.append(reverseString(xhr.responseText))
@@ -140,13 +140,13 @@ You may have noticed that all properties have String values, even numerical data
 1. Reformat *Metascore* to be a number
 1. Reforamt *imdbRating* to be a number
 
-Finally, put all the movies you chose in one JSON array and return that array instead of the `!dlrow olleH` string. To be precise, the array you return will contain three objects each of which represents the data of one movie.
+Finally, put all the movies you chose in one JSON array and return that array instead of the `!dlrow olleH` string. To be precise, the array you return will contain three objects, each representing the data of one movie.
 
 **Once you have done that, the first test will pass! Make sure to check.** Since we did not change anything on the client side, the movie data you return will show up reversed on the web page.
 
 ### Part 2: Rendering the movie data on the client side
 
-In this part, you will have to dynamically add new HTML elements to the `body` of the application's HTML page. Before you can use the information, you will have to find a way to parse the JSON data into a JavaScript array. Then, loop through the movies contained in the array and build the following HTML element structure for each movie:
+In this part, you will have to dynamically add new HTML elements to the `body` of the application's HTML page. Before you can use the information, you must find a way to parse the JSON data into a JavaScript array. Then, loop through the movies contained in the array and build the following HTML element structure for each movie:
 
 * **article**. An article for the whole movie
     * **img**. An image showing the movie *Poster*
