@@ -221,8 +221,9 @@ Here are the details regarding the rules you must add:
 1. **span**
     1. A **right** margin of more than 0 pixels
 1. And finally, some styling for the genre tags, that is, the **span** elements that have class *genre*. Use a [class selector](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors)!
-    1. A `background-color` and a `font-weight` of your liking
+    1. A `background-color` of your liking
     1. A short-hand `padding` with two values (one for top-bottom and one for left-right), both between 2 and 16 pixels
+    1. A bold `font-weight`
     1. A `border-radius` between 2 and 32 pixels
     1. A `border` property containing a **width** between 1 and 8 pixels, a **style** and a **color** of your liking
 
