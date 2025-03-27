@@ -1,109 +1,115 @@
 import { StyleChecker, ColorChecker, BorderStyleChecker, ValueChecker } from "./checkers.mjs";
 
+function validateArrayElements(array, propertyName, expectedType) {
+  expect(array, `The movie property "${propertyName}" should be an array.`).to.be.an('array')
+  array.forEach(item =>
+    expect(item, `Each item in the movie property "${propertyName}" should be of type ${expectedType}.`).to.be.a(expectedType)
+  )
+}
+
+function isValidURL(url) {
+  try {
+    new URL(url)
+    return true
+  } catch (_) {
+    return false
+  }
+}
+
 describe('Testing API response', () => {
 
   it('Data endpoint returns correctly formatted data', () => {
-
-    function checkArray(array, name, type) {
-      expect(array, 'Movie property "' + name + '" expected to be an Array').to.be.an('array')
-      array.forEach(item => expect(item, 'Each item contained in Movie property "' + name + '" is expected to be of type ' + type).to.be.a(type))
-    }
-  
-    function isValidURL(url) {
-      try {
-        new URL(url)
-        return true
-      } catch (_) {
-        return false
-      }
-    }
-
     cy.request('/movies').as('movies')
     cy.get('@movies').should((response) => {
-      const dateRegex = new RegExp("^\\d{4}-\\d{2}-\\d{2}$")
+      const dateRegex = /^\d{4}-\d{2}-\d{2}$/
 
-      expect(response.body, 'Response expected to be an Array').to.be.a('array')
-      expect(response.body.length, 'Response Array expected to contain at least 3 Movies').to.be.at.least(3)
+      expect(response.body, 'The response should be an array of movie objects.').to.be.an('array')
+      expect(response.body.length, 'The response array should contain at least 3 movies.').to.be.at.least(3)
 
       response.body.forEach(movie => {
-        expect(movie, 'Movie expected to have 11 pre-defined keys')
+        expect(movie, 'Each movie object must contain exactly the following keys: Title, Released, Runtime, Genres, Directors, Writers, Actors, Plot, Poster, Metascore, imdbRating.')
           .to.have.keys('Title', 'Released', 'Runtime', 'Genres', 'Directors', 'Writers', 'Actors', 'Plot', 'Poster', 'Metascore', 'imdbRating')
-        expect(movie.Title).to.be.a('string')
-        expect(movie.Released, 'Movie property "Released" is expected to be a ISO 8601 formatted date string').to.match(dateRegex)
-
-        expect(movie.Runtime, 'Movie property "Runtime" is expected to be a number greater or equal to 1').to.be.a('number')
-          .and.to.be.at.least(1)
         
+        expect(movie.Title, 'Movie property "Title" should be a string.').to.be.a('string')
+        expect(movie.Released, 'Movie property "Released" must be an ISO 8601 formatted date string (YYYY-MM-DD).').to.match(dateRegex)
+        
+        expect(movie.Runtime, 'Movie property "Runtime" should be a number (minutes) and at least 1.').to.be.a('number').and.to.be.at.least(1)
+       
         const stringArrayNames = ['Genres', 'Directors', 'Writers', 'Actors']
-        stringArrayNames.forEach(name => checkArray(movie[name], name, 'string'))
+        stringArrayNames.forEach(property =>
+          validateArrayElements(movie[property], property, 'string')
+        )
         
-        expect(movie.Plot).to.be.a('string')
-        expect(movie.Poster).to.be.a('string')
-        expect(isValidURL(movie.Poster), 'Movie property "Poster" is expected to be a URL').to.be.eq(true)
-
-        expect(movie.Metascore, 'Movie property "Metascore" is expected to be a number greater than 0 and less or equal to 100').to.be.a('number')
+        expect(movie.Plot, 'Movie property "Plot" should be a string.').to.be.a('string')
+        expect(movie.Poster, 'Movie property "Poster" should be a string URL.').to.be.a('string')
+        expect(isValidURL(movie.Poster), 'Movie property "Poster" must be a valid URL.').to.be.eq(true)
+        
+        expect(movie.Metascore, 'Movie property "Metascore" should be a number between 1 and 100.')
+          .to.be.a('number')
           .and.to.be.greaterThan(0)
           .and.to.be.at.most(100)
-        expect(movie.imdbRating, 'Movie property "imdbRating" is expected to be a number greater than 0 and less or equal to 10').to.be.a('number')
+        expect(movie.imdbRating, 'Movie property "imdbRating" should be a number between 1 and 10.')
+          .to.be.a('number')
           .and.to.be.greaterThan(0)
           .and.to.be.at.most(10)
       })
     })
   })
 
-  function toChildTagNames(element) {
-    return Array.from(element.children).map(e => e.tagName)
+  function getChildTagNames(element) {
+    return Array.from(element.children).map(child => child.tagName)
   }
 
-  function checkLabeledList(label, element, index, elements) {
-    expect(element.children[index-1]).to.contain(label)
-    checkList(element, index, elements, 'UL', 'LI')
+  function checkLabeledList(label, element, index, expectedItems) {
+    expect(element.children[index - 1], `Expected label "${label}" before the list.`).to.contain(label)
+    checkList(element, index, expectedItems, 'UL', 'LI')
   }
 
-  function checkList(element, index, elements, parentTag = 'P', childTag = 'SPAN') {
-    const child = element.children[index]
-    expect(child.tagName).to.be.eq(parentTag)
-    elements.forEach(e => expect(child.textContent).to.contain(e))
-    expect(toChildTagNames(child)).to.deep.eq(Array(elements.length).fill(childTag))
+  function checkList(element, index, expectedItems, parentTag = 'P', childTag = 'SPAN') {
+    const listElement = element.children[index]
+    expect(listElement.tagName, `Expected element at index ${index} to be a <${parentTag}> element.`).to.eq(parentTag)
+    expectedItems.forEach(item => {
+      expect(listElement.textContent, `The list should contain "${item}".`).to.contain(item)
+    })
+    expect(getChildTagNames(listElement)).to.deep.eq(Array(expectedItems.length).fill(childTag))
   }
 
   it('Data rendering is correct', () => {
     cy.visit('/').then(() => {
-
       cy.request('/movies').then(response => {
         const movies = response.body
 
         cy.get('article').then(movieElements => {
-          expect(movieElements.length).to.be.eq(movies.length)
+          expect(movieElements.length, 'The number of <article> elements should match the number of movies.').to.eq(movies.length)
 
           for (let i = 0; i < movieElements.length; i++) {
             const movieElement = movieElements[i]
-
-            expect(movieElement.children.length, "Movie article must have exactly 11 child elements").to.eq(11)
-            expect(toChildTagNames(movieElement), "Movie article child elements must be correct").to.deep.eq(['IMG', 'H1', 'P', 'P', 'P', 'H2', 'UL', 'H2', 'UL', 'H2', 'UL'])
+            expect(movieElement.children.length, "Each movie article must have exactly 11 child elements.").to.eq(11)
+            expect(getChildTagNames(movieElement), "The child elements' tags of the movie article are not as expected.").to.deep.eq(['IMG', 'H1', 'P', 'P', 'P', 'H2', 'UL', 'H2', 'UL', 'H2', 'UL'])
 
             const movie = movies[i]
-            
-            expect(movieElement.children[0].src).to.contain(movie.Poster)
-            expect(movieElement.children[1]).to.contain(movie.Title)
+
+            expect(movieElement.children[0].src, 'The image source must contain the movie poster URL.').to.contain(movie.Poster)
+            expect(movieElement.children[1], 'The <h1> element should contain the movie title.').to.contain(movie.Title)
 
             const infoElements = movieElement.children[2].children
+            expect(infoElements.length, `The movie information paragraph must have exactly three child elements, but found ${infoElements.length}.`).to.eq(3)
+            expect(infoElements[0], 'The first info span should contain the runtime.').to.contain('Runtime')
+            const runtimeMatch = infoElements[0].innerText.match(/(\d+)h (\d+)m/)
+            expect(parseInt(runtimeMatch[1]) * 60 + parseInt(runtimeMatch[2]), 'The converted runtime in minutes should match the movie Runtime property.')
+              .to.be.eq(parseInt(movie.Runtime))
+            expect(infoElements[1], 'The second info span should contain a bullet character (•).').to.contain('\u2022')
+            expect(infoElements[2], 'The third info span should contain the released date information starting with "Released on".')
+              .to.contain('Released on')
+              .and.to.contain(new Date(movie.Released).toLocaleDateString())
 
-            expect(infoElements.length, "Movie information paragraph must have three children, but has " + infoElements.length).to.eq(3)
-            expect(infoElements[0]).to.contain('Runtime')
-            const r = infoElements[0].innerText.match(/(\d+)h (\d+)m/)
-            expect(parseInt(r[1])*60 + parseInt(r[2])).to.be.eq(parseInt(movie.Runtime))
-            expect(infoElements[1]).to.contain('\u2022')
-            expect(infoElements[2]).to.contain('Released on').and
-              .to.contain(new Date(movie.Released).toLocaleDateString())
-            
             checkList(movieElement, 3, movie.Genres)
             const genreElements = movieElement.children[3].children
             for (let j = 0; j < genreElements.length; j++) {
-              expect(genreElements[j]).to.have.class("genre")
+              expect(genreElements[j], `Genre element at index ${j} should have class "genre".`).to.have.class("genre")
             }
-            
-            expect(movieElement.children[4]).to.contain(movie.Plot)
+
+            expect(movieElement.children[4], 'The plot paragraph should contain the movie plot.').to.contain(movie.Plot)
             checkLabeledList('Director', movieElement, 6, movie.Directors)
             checkLabeledList('Writer', movieElement, 8, movie.Writers)
             checkLabeledList('Actor', movieElement, 10, movie.Actors)
@@ -114,11 +120,10 @@ describe('Testing API response', () => {
   })
 
   it('Data styling is correct', () => {
-
     cy.visit('/').then(() => {
 
       const document = cy.state('document')
-      expect(document.styleSheets.length, "Expect document to contain one style sheet").to.eq(1)
+      expect(document.styleSheets.length, "Expected the document to contain exactly one style sheet.").to.eq(1)
 
       new StyleChecker('body')
         .eq('font-family', '"Trebuchet MS", sans-serif')
