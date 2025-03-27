@@ -31,6 +31,8 @@ After starting the server you should see the message
 in your terminal. Visit [http://localhost:3000/](http://localhost:3000/) using your favorite Web Browser to test the application. You will see a simple message from the server displayed on the page:
 
     Hello world!
+    
+Make sure you are in the project's root directory (where the package.json file is located) before running the above commands. If you do not see the expected message, verify that no other application is already using port 3000.
 
 ## Project structure
 
@@ -80,7 +82,7 @@ To start the tests, run
 
     npm run cypress
 
-If you do so without making any changes to the application, all tests will fail. After implementing an individual part, the corresponding test will pass. It is best to do them in order because they build on top of each other. 
+If you do so without making any changes to the application, all tests will fail. After implementing an individual part, the corresponding test will pass. We strongly recommend completing the parts in order, because each part’s test depends on the previous part’s implementation.
 
 Here's how the Cypress UI looks after running the command above:
 
@@ -141,6 +143,8 @@ You may have noticed that all properties have String values, even numerical data
 1. Reforamt *imdbRating* to be a number
 
 Finally, put all the movies you chose in one JSON array and return that array instead of the `!dlrow olleH` string. To be precise, the array you return will contain three objects, each representing the data of one movie.
+
+Tip: Use a small tool or online JSON validator to ensure your final JSON is valid before returning it. Also, remember to send this JSON as the response directly from your /movies endpoint.
 
 **Once you have done that, the first test will pass! Make sure to check.** Since we did not change anything on the client side, the movie data you return will show up reversed on the web page.
 
@@ -230,5 +234,6 @@ Here are the details regarding the rules you must add:
 In the end, your application looks something like this:
 
 ![Exercise 1 example implementation shown Chrome](images/Part3-done.png "Exercise 1 implementation shown in Chrome")
+You can add more CSS rules if you wish, but the rules above are required to pass the final test. Be sure you test again using Cypress after making changes.
 
 You have finished the first exercise: **Congratulations, all tests pass!** 
