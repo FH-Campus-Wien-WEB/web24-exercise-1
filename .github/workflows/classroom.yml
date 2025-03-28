@@ -2,13 +2,27 @@ name: End-to-end tests
 on: [push]
 jobs:
   cypress-run:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Check out the repository
         uses: actions/checkout@v3
-      # Install NPM dependencies, cache them correctly
-      # and run all Cypress tests
-      - name: Cypress run
-        uses: cypress-io/github-action@v5
-        with:
-          start: npm start
+
+      - name: Install dependencies
+        run: npm install
+
+      # Server starten (z. B. Node.js-App)
+      - name: Start server
+        run: npm start &
+        # Setze hier ggf. "timeout: 10s" usw., falls nötig
+
+      # Warte, bis Server erreichbar ist
+      - name: Wait for server
+        run: npx wait-on http://localhost:3000
+      
+      # Führe Cypress-Tests aus und speichere das Ergebnis als JSON
+      - name: Run Cypress tests
+        run: npx cypress run --reporter json > cypress-result.json || true
+      
+      # Berechne die erreichten Punkte abhängig von bestandenen Tests
+      - name: Calculate partial score
+        run: node .github/workflows/calculate_score.js
